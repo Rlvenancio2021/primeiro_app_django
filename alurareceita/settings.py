@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import dotenv
+dotenv.load_dotenv(dotenv.find_dotenv())
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -78,9 +80,9 @@ WSGI_APPLICATION = 'alurareceita.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'informe aqui o nome do banco de dados',
-        'USER': 'informe aqui o usuário do bando de dados',
-        'PASSWORD': 'informe aqui a senha do bando de dados',
+        'NAME': os.getenv('nome_bd'),
+        'USER': os.getenv('usuario_bd'),
+        'PASSWORD': os.getenv('senha_bd'),
         'HOST': 'localhost'
     }
 }
