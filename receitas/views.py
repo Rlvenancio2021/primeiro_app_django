@@ -5,7 +5,7 @@ from .models import Receita
 
 # Create your views here.
 def index(request):
-    receitas = (Receita.objects.all) # Para o mdelo de receitas retornar todas as receitas existentes
+    receitas = Receita.objects.filter(publicada=True)
     dados = {
         'receitas': receitas
     }

@@ -12,3 +12,4 @@ class Receita(models.Model):
     rendimento = models.CharField(max_length=100)
     categoria = models.CharField(max_length=100)
     data_receita = models.DateTimeField(default=datetime.now, blank=True) # blank para caso não for possível pegar a informação, pode deixar em branco.
+    publicada = models.BooleanField(default=False) # Cria um campo para flag de publicação
