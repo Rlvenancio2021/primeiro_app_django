@@ -18,3 +18,6 @@ def receita(request, receita_id):
         'receita': receita
     }
     return render(request, 'receita.html', receita_a_exibir)
+
+def buscar(request):
+    return render(request, 'buscar.html') # Cria caminha para página de busca. Um método para atender a requisição

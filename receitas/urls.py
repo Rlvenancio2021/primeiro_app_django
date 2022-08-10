@@ -9,5 +9,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('<int:receita_id>', views.receita, name='receita') # Prepara o URL para receber o número de ID do Banco de Dados.
+    path('<int:receita_id>', views.receita, name='receita'), # Prepara o URL para receber o número de ID do Banco de Dados.
+    path('busca', views.buscar, name='buscar') # Cria caminho para o método buscar
 ]
