@@ -14,3 +14,5 @@ class Receita(models.Model):
     data_receita = models.DateTimeField(default=datetime.now, blank=True) # blank para caso não for possível pegar a informação, pode deixar em branco.
     publicada = models.BooleanField(default=False) # Cria um campo para flag de publicação
     foto_receita = models.ImageField(upload_to='fotos/%d/%m/%Y', blank=True)
+    def __str__(self):
+        return self.nome_receita
