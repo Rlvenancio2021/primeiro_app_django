@@ -1,1 +1,68 @@
-<h1>Dashboard, Olá {{ user.username }}</h1>
+{% extends 'base.html' %} <!-- Tags que indica que este arquivo é uma extenção do arquivo "base.html" -->
+{% load static %} <!-- Para carregar os arquivos estáticos -->
+{% block content %} <!-- Indica o início do bloco de código que será insedido no local indicado no arquivo "base.html" -->
+
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+        <img src="{% static 'img/core-img/pizza.png' %}" alt="">
+    </div>
+
+    <!-- Search Wrapper -->
+    {% include 'partials/_busca.html'%}
+
+    <!-- ##### Header Area Start ##### -->
+    {% include 'partials/_menu.html'%} <!-- Inlcui o MENU por meio de Partials, para garantir a padronização e reutilização do trecho de código -->
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ### Área de identificação do usuário ### -->
+    <div class="contact-area section-padding-0-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading">
+                        <h3>Olá {{ user.username }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ### Fim da Área de identificação do usuário ### -->
+
+    <!-- ##### Best Receipe Area Start ##### -->
+    <section class="best-receipe-area">
+        <div class="container">
+            <div class="row">
+                {% if receitas %} <!-- Comando para verificar se existe receitas, conforme configuração na views -->
+                <!-- Chaves e Porcento, sempre que for processar um código Python -->
+                {% for receita in receitas %} <!-- Looping para pegar os itens de cada receita e exibir na tela -->
+                <!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="single-best-receipe-area mb-30">
+                        {% if receita.foto_receita == '' %}
+                            <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
+                        {% else %}
+                            <img src="{{ receita.foto_receita.url }}" alt="">
+                        {% endif %}
+                        <div class="receipe-content">
+                            <a href="{% url 'receita' receita.id %}">
+                                <h5>{{ receita.nome_receita }}</h5> <!-- Nome conforme o nome existente no banco de dados, verificar no arquivo models.py -->
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %} <!-- Tag que finaliza o código for -->
+                {% else %}
+                {% endif %} <!-- Finaliza o comando IF -->
+            </div>
+        </div>
+    </section>
+    <!-- ##### Best Receipe Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+    {% include 'partials/_footer.html' %}  <!-- Inlcui o FOOTER por meio de Partials, para garantir a padronização e reutilização do trecho de código -->
+    <!-- ##### Footer Area Start ##### -->
+
+
+{% endblock %} <!-- Indica a linha onde finaliza o bloco de código -->
