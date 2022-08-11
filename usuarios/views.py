@@ -1,6 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404 # Para pegar a "pessoa" da requisição
 from django.contrib.auth.models import User
 from django.contrib import auth
+from receitas.models import Receita
+'''
+Realizar importação do modelo de Receitas, para possibilitar a criação de um objeto de Receita dentro veiws de usuário.
+'''
 
 # Create your views here.
 def cadastro(request):
@@ -65,7 +69,18 @@ def cria_receita(request):
         rendimento = request.POST['rendimento']
         categoria = request.POST['categoria']
         foto_receita = request.FILES['foto_receita'] # Para carregar arquivos
-        print(nome_receita, ingredientes, modo_preparo, tempo_preparo, rendimento, categoria, foto_receita)
+        user = get_object_or_404(User, pk=request.user.id) # Para pegar a "pessoa" da requisição
+        receita = Receita.objects.create(
+            pessoa = user,
+            nome_receita = nome_receita,
+            ingredientes = ingredientes,
+            modo_preparo = modo_preparo,
+            tempo_preparo = tempo_preparo,
+            rendimento = rendimento,
+            categoria = categoria,
+            foto_receita = foto_receita
+        ) # Cria o objeto receita com base na classe Receita (Banco de Dados)
+        receita.save() # Registra receita criado no banco de dados.
         return redirect('dashboard')
     else:
         return render(request, 'usuarios/cria_receita.html')
