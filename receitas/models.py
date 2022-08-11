@@ -1,10 +1,10 @@
 from django.db import models
 from datetime import datetime
-from pessoas.models import Pessoa
+from django.contrib.auth.models import User # Importa o modelo de usuários do Django para ser utilizando no Banco de Dados
 
 # Create your models here.
 class Receita(models.Model):
-    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE) # Cria uma vinculação dos dados entre os banco de dados
+    pessoa = models.ForeignKey(User, on_delete=models.CASCADE) # Cria uma vinculação dos dados do usuário com o banco de dados
     nome_receita = models.CharField(max_length=200)
     ingredientes = models.TextField()
     modo_preparo = models.TextField()
