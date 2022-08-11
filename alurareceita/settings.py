@@ -60,7 +60,7 @@ ROOT_URLCONF = 'alurareceita.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'receitas/templates')], # Referencia local onde estão as páginas HTML
+        'DIRS': [os.path.join(BASE_DIR, 'templates')], # Referencia local onde estão as páginas HTML
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

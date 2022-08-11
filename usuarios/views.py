@@ -1,11 +1,11 @@
 from django.shortcuts import render
 
 # Create your views here.
-def cadastrao(request):
-    pass
+def cadastro(request):
+    return render(request, 'usuarios/cadastro.html')
 
 def login(request):
-    pass
+    return render(request, 'usuarios/login.html')
 
 def logout(request):
     pass
