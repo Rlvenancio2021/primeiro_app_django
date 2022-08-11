@@ -55,7 +55,12 @@ def logout(request):
 
 def dashboard(request):
     if request.user.is_authenticated: # Comando para validar se o usuário está de fato logado, caso não estiver será redirecionado para a home.
-        return render(request, 'usuarios/dashboard.html')
+        id = request.user.id
+        receitas = Receita.objects.order_by('-data_receita').filter(pessoa = id)
+        dados = {
+            'receitas': receitas
+        }
+        return render(request, 'usuarios/dashboard.html', dados)
     else:
         return redirect('index')
     
