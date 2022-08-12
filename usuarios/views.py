@@ -13,17 +13,20 @@ def cadastro(request):
         email = request.POST['email']
         senha = request.POST['password']
         senha2 = request.POST['password2']
-        if not nome.strip():
+        if campo_vazio(nome):
             messages.warning(request, 'O campo nome não pode ficar em branco')
             return redirect('cadastro')
-        if not email.strip():
+        if not nome.strip(email):
             messages.warning(request, 'O campo e-mail não pode ficar em branco')
             return redirect('cadastro')
-        if senha != senha2:
+        if senhas_nao_sao_iguais(senha, senha2):
             messages.error(request, 'As senhas não são iguais !!')
             return redirect('cadastro')
         if User.objects.filter(email=email).exists(): # Função que verificar se o usuário já existe. Para este uso é necessário importar a bibliteca User.
-            messages.warning(request, 'Usuário já cadastrado')
+            messages.error(request, 'Usuário já cadastrado')
+            return redirect('cadastro')
+        if User.objects.filter(username=nome).exists(): # Função que verificar se o usuário já existe. Para este uso é necessário importar a bibliteca User.
+            messages.error(request, 'Usuário já cadastrado')
             return redirect('cadastro')
         user = User.objects.create_user(username=nome, email=email, password=senha) # Cria um objeto para o usuário que deseja cadastrar.
         user.save() # função que grava o usuário no banco de dados.
@@ -36,8 +39,8 @@ def login(request):
     if request.method == 'POST':
         email = request.POST['email']
         senha = request.POST['senha']
-        if email == "" or senha == "":
-            print('Os campos e-mail e senha não podem ficar em branco')
+        if campo_vazio(email) or campo_vazio(senha):
+            messages.warning(request, 'Os campos e-mail e senha não podem ficar em branco')
             return redirect('login')
         print(email, senha)
         if User.objects.filter(email=email).exists():
@@ -89,3 +92,9 @@ def cria_receita(request):
         return redirect('dashboard')
     else:
         return render(request, 'usuarios/cria_receita.html')
+
+def campo_vazio(campo):
+    return not campo.strip()
+
+def senhas_nao_sao_iguais(senha, senha2):
+    return senha != senha2
