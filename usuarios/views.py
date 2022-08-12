@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404 # Para pegar a "pessoa" da requisição
 from django.contrib.auth.models import User
-from django.contrib import auth
+from django.contrib import auth, messages
 from receitas.models import Receita
 '''
 Realizar importação do modelo de Receitas, para possibilitar a criação de um objeto de Receita dentro veiws de usuário.
@@ -14,20 +14,20 @@ def cadastro(request):
         senha = request.POST['password']
         senha2 = request.POST['password2']
         if not nome.strip():
-            print('O campo nome não pode ficar em branco')
+            messages.warning(request, 'O campo nome não pode ficar em branco')
             return redirect('cadastro')
         if not email.strip():
-            print('O campo e-mail não pode ficar em branco')
+            messages.warning(request, 'O campo e-mail não pode ficar em branco')
             return redirect('cadastro')
         if senha != senha2:
-            print('As senhas não são iguais')
+            messages.error(request, 'As senhas não são iguais !!')
             return redirect('cadastro')
         if User.objects.filter(email=email).exists(): # Função que verificar se o usuário já existe. Para este uso é necessário importar a bibliteca User.
-            print('Usuário já cadastrado')
+            messages.warning(request, 'Usuário já cadastrado')
             return redirect('cadastro')
         user = User.objects.create_user(username=nome, email=email, password=senha) # Cria um objeto para o usuário que deseja cadastrar.
         user.save() # função que grava o usuário no banco de dados.
-        print('Usuário cadastrado com sucesso!!')
+        messages.success(request, 'Cadastro realizado com sucesso !!')
         return redirect('login')
     else:
         return render(request, 'usuarios/cadastro.html')

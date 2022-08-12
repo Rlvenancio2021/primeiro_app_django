@@ -138,3 +138,15 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Messages
+""" 
+Podemos utilizar o MESSAGES pois já contas tanto o MIDDLEWARE quanto em TEMPLATES.
+"""
+from django.contrib.messages import constants as messages
+# Os nomes DANGER e SUCCESS conforme "bootstrap alertas" (pesquisar na web)
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+}

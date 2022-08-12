@@ -1,0 +1,12 @@
+<!--
+    Arquivo criado na pasta do Partials apenas por ser um HTML simples, não é obrigatorio o use desse diretório.
+-->
+
+<!-- Com as Tags Python, deixamos as mensagens mais dinâmicas, assim, no nosso caso, pode ser utilizado tanto para mensagens de sucesso como de erro -->
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+{% endif %}
