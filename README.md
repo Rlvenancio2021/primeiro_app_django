@@ -42,4 +42,15 @@ Na pasta Templates será possível observar todas as páginas que foram criadas 
 Os modelos de banco de dados podem ser verificados no arquivo *models.py* tanto da tabela PESSOA quanto RECEITA. Como o banco de dados irá guardar o endereço de cada imagem a ser anexada das receitas quando realizar o Upload, a imagem será gravada na pasta **media/fotos** na data que foi carregada.
 
 
+### DJANGO adminstrando banco de dados
+
+Com o uso da página **Admin** que o framework oferece, é possível fazer a gestão do BD realizandos os famosos CRUD, usando a interface sem precisar executar as linhas de comando, e, também - como esperado, adminsitrar o site criado no programa, as receitas que serão exibidos, gestão dos usuários cadastrados.
+
+
+**Creat - Criar / 
+Read - Leitura / 
+Update - Atualiza / 
+Delete - Deleta**
+
+
 ###### Estou desenvolvendo este projeto acompanhando um curso e por este motivo os commit estão bem detalhados, apenas para servir como um guia futuramente.
